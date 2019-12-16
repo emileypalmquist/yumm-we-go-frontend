@@ -1,24 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
+// import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import SignUp from './components/signUp'
+import Login from './components/login'
+import Nav from './components/nav'
+import BookmarksContainer from './containers/bookmarksContainer'
+import FindRestaurantsContainer from './containers/findRestaurantsContainer'
+import FriendsContainer from './containers/friendsContainer'
+import FindFriends from './components/findFriends'
+import OtherUserProfile from './components/otherUserProfile'
+
 import './App.css';
 
 function App() {
+
+  //need to add logic which view to show when
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Nav />
+      <OtherUserProfile />
     </div>
   );
 }
