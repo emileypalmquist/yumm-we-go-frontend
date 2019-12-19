@@ -1,17 +1,44 @@
 import React, {Component} from 'react'
 import Friend from './friend'
+import { connect } from 'react-redux'
+import { Link } from "react-router-dom"
 
 class FriendsList extends Component {
-  //need logic for what to display: users, add friends
+  //need styling for left div so at top not bottom where right ends
+  
+
   render() {
+    console.log(this.props.recFriends)
+    const { status, recFriends, friends, className } = this.props
     return (
-      <div className={this.props.className}>
-        {this.props.status && <h5>{this.props.status}</h5>}
-        will have all friends or recommended
-        <Friend />
-      </div>
+      <>
+      {className == 'left' && 
+        <div className={className}>{ friends.length > 0 ? 
+          (friends.map(friend => {
+          return <Friend key={friend.id} user={friend}/> })
+          ) : (<>
+          <h6>You currently have no Friends :(</h6>
+          <Link to="find-friends" ><button>Add Friends</button></Link> 
+          </>)}
+        </div>
+      }
+      
+      { className === 'right' && <div className={className}>
+          <h5>{status}</h5>
+          {recFriends.map(user => <Friend key={user.id} user={user} />)}
+        </div> 
+      }
+      </>
+      
     )
   }
 }
 
-export default FriendsList
+const mapStateToProps = state => {
+  return {
+    friends: state.friends,
+    recFriends: state.recFriends
+  }
+}
+
+export default connect(mapStateToProps)(FriendsList);
