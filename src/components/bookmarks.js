@@ -1,13 +1,18 @@
 import React, {Component} from 'react'
-import RestaurantListItem from './restaurantListItem'
+import BookmarkRestaurantListItem from './bookmarkRestaurantListItem'
 
 class Bookmarks extends Component {
-  //need to add data and logic with displaying restaurant list item or you have no favorites
   render() {
+    const {restaurants, message, status, button, updateBookmarks, updateAllBookmarks} = this.props
     return (
-      <div>
-        <h2>{this.props.status}</h2>
-        <RestaurantListItem />
+      <div className='bookmark'>
+        <h2>{status}</h2>
+        { restaurants.length > 0 ?
+        (restaurants.map( restaurant =>
+        <BookmarkRestaurantListItem restaurant={restaurant} key={restaurant.id} button={button} updateBookmarks={updateBookmarks} updateAllBookmarks={updateAllBookmarks}/> ) ):
+        (<h5>{message}</h5>)
+        }
+        
       </div>
     )
   }

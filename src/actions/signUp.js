@@ -22,9 +22,8 @@ const signUp = (e, state, history) => {
       .then(resp => resp.json())
       .then(data => {
           if (data.user) {
-            dispatch({ type: "SET_CURRENT_USER", user: data.user })
-            dispatch({ type: "ADD_USER", user: data.user })
             localStorage.setItem('jwt', data.jwt)
+            dispatch({ type: "SET_CURRENT_USER", user: data.user })
             history.push('/find-restaurant')
           } else {
             document.getElementById('signUpError').innerText = data.error

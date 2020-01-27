@@ -24,7 +24,7 @@ class SignUp extends Component {
   //need to add listeners and onclick logic
   render() {
     return (
-      <form id='sign-up' onSubmit={(e) => this.props.signUp(e, this.state, this.props.history)}>
+      <form id='sign-up' onSubmit={(e) => this.props.signUp(e, this.state, this.props.history)} className="form">
         <label htmlFor='firstName'>First Name </label>
         <input type='text' name='firstName' onChange={this.handleChange}/>
         <br />
@@ -41,7 +41,7 @@ class SignUp extends Component {
         <input type='text' name='username' onChange={this.handleChange}/>
         <br />
         <label htmlFor='password'>Password</label>
-        <input type='text' name='password' onChange={this.handleChange}/>
+        <input type='password' name='password' onChange={this.handleChange}/>
         <br />
         <input type='submit' value='Sign Up'/>
         <p id='signUpError'></p>

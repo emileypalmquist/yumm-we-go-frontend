@@ -5,7 +5,8 @@ class Friend extends Component {
   render() {
     const {user} = this.props
     return (
-    <h6>{user.first_name}</h6>
+    <h6>{user.first_name + " " + user.last_name}</h6>
+    
     )
   }
 }

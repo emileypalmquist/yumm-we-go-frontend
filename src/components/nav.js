@@ -16,7 +16,7 @@ class Nav extends Component {
         {this.props.currentUser !== null ?
         (<><Link to="/find-restaurant"><div className='nav-left'>Find Me Food</div></Link>
         <Link to="/bookmarks"><div className='nav-left'>Bookmarks</div></Link>
-        <Link to="/friends"><div className='nav-left'>Friends</div></Link>
+        {/* <Link to="/friends"><div className='nav-left'>Friends</div></Link> */}
         <Link to="/"><div className='nav-right' onClick={this.handleClick} >Sign Out</div></Link></>) : <Link to="/login"><div className='nav-right'> Login</div></Link>
         }
       </div>
