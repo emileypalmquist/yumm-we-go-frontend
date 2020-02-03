@@ -12,7 +12,8 @@ const reAuth = () => {
       })
       .then(resp => resp.json())
       .then(data => {
-          dispatch({ type: "SET_CURRENT_USER", user: data.user })
+        dispatch({ type: "SET_BOOKMARKS", bookmarks: data.user.restaurants})
+        dispatch({ type: "SET_CURRENT_USER", user: data.user }) 
       })
     } else {
         return null

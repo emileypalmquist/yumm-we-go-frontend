@@ -19,7 +19,9 @@ const login = (e, state, history) => {
       .then(data => {
         if (data.user){
           localStorage.setItem('jwt', data.jwt)
+          dispatch({ type: "SET_BOOKMARKS", bookmarks: data.user.restaurants})
           dispatch({ type: "SET_CURRENT_USER", user: data.user })
+          
         } else {
           document.getElementById('loginError').innerText = data.message
         }

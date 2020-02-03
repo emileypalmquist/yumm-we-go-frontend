@@ -8,11 +8,10 @@ class FriendsList extends Component {
   
 
   render() {
-    console.log(this.props.recFriends)
     const { status, recFriends, friends, className } = this.props
     return (
       <>
-      {className == 'left' && 
+      {className === 'left' && 
         <div className={className}>{ friends.length > 0 ? 
           (friends.map(friend => {
           return <Friend key={friend.id} user={friend}/> })

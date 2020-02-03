@@ -3,8 +3,6 @@ import Friend from './friend'
 import { connect } from 'react-redux'
 
 class FindFriends extends Component {
- 
-  //styling so split half down screen
   render() {
     const {findFriends} = this.props
     return (

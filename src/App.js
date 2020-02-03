@@ -10,23 +10,22 @@ import FriendsContainer from './containers/friendsContainer'
 import FindFriends from './components/findFriends'
 import OtherUserProfile from './components/otherUserProfile'
 import Welcome from './components/welcome'
-
 import reAuth from './actions/reAuth'
 import fetchAllFriends from './actions/fetchAllFriends'
 import fetchRecommendedFriends from './actions/fetchRecommendedFriends'
 import fetchFindFriendsUsers from './actions/fetchFindFriendsUsers'
+import setCurrentPosition from './actions/setCurrentPosition'
 
 import './App.css';
 
 class App extends Component {
 
-  //need to add logic which view to show when
   componentDidMount() {
     this.props.reAuth()
+    this.props.setCurrentPosition()
   }
 
   componentDidUpdate() {
-   
     if (this.props.recFriends.length === 0 && this.props.currentUser){
       this.props.fetchAllFriends()
       this.props.fetchRecommendedFriends()
@@ -35,39 +34,39 @@ class App extends Component {
   }
   
   render() {
-  return (
-    <div className="App">
-      <Router>
-      <Nav />
-        <Switch>
-          <Route exact path='/' component ={Welcome}/>
-          <Route exact path='/login' component={Login}/>
-          <Route exact path='/signup' component={SignUp}/>
-          { this.props.currentUser !== null ?
-            <>
-              
-              <Switch>
-              <Route exact path='/bookmarks' component={BookmarksContainer} />
-              <Route exact path='/find-restaurant' component={FindRestaurantsContainer}/>
-              <Route exact path='/friends' component={FriendsContainer}/>
-              <Route exact path='/find-friends' component={FindFriends}/>
-              <Route exact path='/user/:id' component={OtherUserProfile}/>
-              </Switch>
-            </> : <>
-            <p>Must Login to Access this Page</p>
-            </>
-            }
-        </Switch>
-      </Router>
-    </div>
-  );
+    return (
+      <div className="App">
+        <Router>
+        <Nav />
+          <Switch>
+            <Route exact path='/' component ={Welcome}/>
+            <Route exact path='/login' component={Login}/>
+            <Route exact path='/signup' component={SignUp}/>
+            { this.props.currentUser !== null ?
+              <>
+                <Switch>
+                <Route exact path='/bookmarks' render={() => <BookmarksContainer bookmarks={this.props.currentUser.restaurants}/>} />
+                <Route path='/find-restaurant' component={FindRestaurantsContainer}/>
+                {/* <Route exact path='/friends' component={FriendsContainer}/>
+                <Route exact path='/find-friends' component={FindFriends}/> */}
+                <Route exact path='/user/:id' component={OtherUserProfile}/>
+                </Switch>
+              </> : <>
+              <p>Must Login to Access this Page</p>
+              </>
+              }
+          </Switch>
+        </Router>
+      </div>
+    );
   }
 }
 
 const mapStateToProps = state => {
   return {
     currentUser: state.currentUser,
-    recFriends: state.recFriends
+    recFriends: state.recFriends,
+    bookmarks: state.bookmarks
   }
 }
 
@@ -76,7 +75,8 @@ const mapsToDispatchProps = dispatch => {
     reAuth: () => dispatch(reAuth()),
     fetchAllFriends: ()=> dispatch(fetchAllFriends()),
     fetchRecommendedFriends: () => dispatch(fetchRecommendedFriends()),
-    fetchFindFriendsUsers: () => dispatch(fetchFindFriendsUsers())
+    fetchFindFriendsUsers: () => dispatch(fetchFindFriendsUsers()),
+    setCurrentPosition: () => dispatch(setCurrentPosition())
   }
 }
   
